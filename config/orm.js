@@ -1,33 +1,30 @@
-import { builtinModules } from 'module';
-
 const connection = require('./connection.js')
 
-
 const orm = {
-    selectAll: function (tableInput) {
+    selectAll: function (tableInput, cb) {
         var queryString = "SELECT * FROM ??";
         connection.query(queryString, [tableInput], function (err, result) {
           if (err) throw err;
           console.log(result);
-          return(result)
+          cb(result)
         });
       },
-    insertOne: (burgerName) => {
+    insertOne: (burgerName, cb) => {
         const queryString = "INSERT INTO burgers (burger_name) VALUES ?"
         connection.query(queryString, [burgerName], function (err, result) {
             if (err) throw err;
             console.log(result)
-            return(result)
+            cb(result)
         })
     },
-    updateOne: (tableInput, burger_name, devouredState) => {
-        const queryString = "UPDATE ?? SET devoured = ? WHERE burger_name = ?"
-        connection.query(queryString, [tableInput, devoured, burger_name], function(err, result) {
+    updateOne: (id, burger_name, devouredState, cb) => {
+        const queryString = "UPDATE ?? SET devoured = ? WHERE id = ?"
+        connection.query(queryString, [id, devoured, burger_name], function(err, result) {
             if (err) throw err;
             console.log(result)
-            return(result)
+            cb(result)
         })
     }
 }
 
-modules.export = orm
+module.exports = orm
