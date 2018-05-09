@@ -1,4 +1,4 @@
-const orm = requires('./config/orm.js')
+const orm = require('../config/orm.js')
 
 const burgerLogic = {
     all: (cb) => {
@@ -11,15 +11,15 @@ const burgerLogic = {
             cb(res)
         })
     },
-    update: (burgerName, cb) => {
-        orm.updateONe("burgers", burgerName, true, (res) => {
+    update: (id, cb) => {
+        orm.updateONe("burgers", id, true, (res) => {
             cb(res)
         })
 
     },
     // Deprecated
     delete: () => {
-        orm.deleteOne("burgers", bugerName, (res) => {
+        orm.deleteOne("burgers", burgerName, (res) => {
             cb(res)
         })
 
